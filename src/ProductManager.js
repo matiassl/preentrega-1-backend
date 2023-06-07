@@ -5,7 +5,7 @@ class ProductManager {
         this.path = path;
     }
 
-    addProduct2 = async (title, description, price, thumbnail, code, stock) => {
+    addProduct = async ( title, description, code, price, status, stock, category, thumbnail) => {
         let products = [];
         try {
             products = await this.getProducts();
@@ -13,7 +13,7 @@ class ProductManager {
             console.log(`Creando archivo.`);
         }
         const id = products.length + 1;
-        products.push({ id, title, description, price, thumbnail, code, stock });
+        products.push({ id,  title, description, code, price, status, stock, category, thumbnail });
 
         return await fs.promises.writeFile(this.path, JSON.stringify(products, null, '\t'));
     }
