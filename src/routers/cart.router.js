@@ -45,20 +45,4 @@ router.get('/:pid', async (request, response) => {
 
 
 
-//Actualizar 1 producto
-router.put('/:id', (req, res) => {
-    const id = req.params.id
-    const data = req.body
-    Productos.updateProduct(id, data);
-    
-    res.json({ message: 'Producto actualizado' })
-})
-
-//Eliminar 1 producto
-router.delete('/:id', (req, res) => {
-    const id = req.params.id
-    Productos.delete(id);
-    res.json({ message: `Producto eliminado` })
-})
-
 export default router;
