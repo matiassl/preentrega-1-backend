@@ -1,5 +1,4 @@
 import { Router } from 'express'
-import ProductManager from '../ProductManager';
 const router = Router()
 
 //const Productos = new ProductManager('./products.json');
@@ -54,3 +53,5 @@ router.delete('/:id', (req, res) => {
     Productos.delete(id);
     res.json({ message: `Producto eliminado` })
 })
+
+export default router;
