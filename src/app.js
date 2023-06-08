@@ -8,9 +8,19 @@ app.get('/',(request , response)=>{
     response.send('Hola Mundo');
 })
 
-app.use('api/products', productRouter);
+app.use('/api/products', productRouter);
 
 app.listen(8080, ()=>console.log('Server up'));
 
 //node ./src/app.js
 //node --watch ./src/app.js
+
+
+// { "title": "fof",
+// "description": "fof",
+// "code": "fof", 
+// "price": "fof",
+// "status": "true",
+// "stock": "fof", 
+// "category": "fof", 
+// "thumbnail": "fof" }

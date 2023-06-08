@@ -5,18 +5,32 @@ class ProductManager {
         this.path = path;
     }
 
-    addProduct = async ( title, description, code, price, status, stock = true, category, thumbnail) => {
+
+
+    addProduct = async ({ title, description, code, price, status, stock, category, thumbnail }) => {
         let products = [];
         try {
-            products = await this.getProducts();
+          products = await this.getProducts();
         } catch (error) {
-            console.log(`Creando archivo.`);
+          console.log(`Creando archivo.`);
         }
         const id = products.length + 1;
-        products.push({ id,  title, description, code, price, status, stock, category, thumbnail });
-
-        return await fs.promises.writeFile(this.path, JSON.stringify(products, null, '\t'));
-    }
+        products.push({
+          id,
+          title,
+          description,
+          code,
+          price,
+          status,
+          stock,
+          category,
+          thumbnail
+        });
+      
+        await fs.promises.writeFile(this.path, JSON.stringify(products, null, '\t'));
+      }
+      
+      
 
     getProducts = async () => {
         try {
@@ -39,27 +53,21 @@ class ProductManager {
         await fs.promises.writeFile(this.path, JSON.stringify(products, null, '\t'));
     }
 
-    //  updateProduct = async(id, campos) => {
-    //     let products = await this.getProducts();
-    //     const index = products.findIndex(product => product.id === id);
-    //     if (index !== -1) {
-    //         const product = products[index];
-    //         products[index] = { ...product, ...campos };
-    //         await fs.promises.writeFile(this.path, JSON.stringify(products, null, '\t'));
-    //         return products[index];
-    //     }
-    //     return null;
-    // }
 
     updateProduct = async (id, campos) => {
         let products = await this.getProducts();
-        const index = products.findIndex(product => product.id === id);
+        
+       // console.log(  products.find(product => product.id == id));
+        const index = products.findIndex(product => product.id == id);
         if (index !== -1) {
           products[index] = { ...products[index], ...campos };
           await fs.promises.writeFile(this.path, JSON.stringify(products, null, '\t'));
+          return products
         }
         return null;
       }
+    
+    
 }
 
 export default ProductManager;

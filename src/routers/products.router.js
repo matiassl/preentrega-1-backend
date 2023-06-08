@@ -2,7 +2,7 @@ import { Router } from 'express'
 import ProductManager from '../ProductManager.js'
 const router = Router()
 
-const Productos = new ProductManager('../data/products.json');
+const Productos = new ProductManager('src/data/products.json');
 
 
 //Mostrar Productos 
@@ -48,18 +48,36 @@ router.post('/', (request, response) => {
 })
 
 //Actualizar 1 producto
-router.put('/:id', (req, res) => {
-    const id = req.params.id
-    const data = req.body
-    Productos.updateProduct(id, data);
+// router.put('/:id', async (req, res) => {
+//     const id = req.params.id;
+//     const campos = req.body;
 
-    res.json({ message: 'Producto actualizado' })
-})
+//     try {
+//         await Productos.updateProduct(id, campos);
+//         res.json({ message: 'Producto actualizado' });
+//     } catch (error) {
+//         res.status(500).json({ error: 'Error al actualizar el producto' });
+//     }
+// });
+
+router.put('/:id', async (req, res) => {
+    const id = req.params.id;
+    const campos = req.body;
+    const updatedProduct = await Productos.updateProduct(id, campos);
+
+    if (updatedProduct) {
+        res.json({ message: 'Producto actualizado' });
+    } else {
+        res.json({ message: `El producto con ID ${id} no existe` });
+    }
+});
+
+
 
 //Eliminar 1 producto
 router.delete('/:id', (req, res) => {
     const id = req.params.id
-    Productos.delete(id);
+    Productos.deleteProduct(id);
     res.json({ message: `Producto eliminado` })
 })
 
