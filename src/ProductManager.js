@@ -5,7 +5,7 @@ class ProductManager {
         this.path = path;
     }
 
-    addProduct = async ( title, description, code, price, status, stock, category, thumbnail) => {
+    addProduct = async ( title, description, code, price, status, stock = true, category, thumbnail) => {
         let products = [];
         try {
             products = await this.getProducts();

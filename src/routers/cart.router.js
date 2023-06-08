@@ -1,8 +1,8 @@
 import { Router } from 'express'
-import ProductManager from '../../ProductManager';
+import ProductManager from '../ProductManager';
 const router = Router()
 
-const Productos = new ProductManager('./products.json');
+//const Productos = new ProductManager('./products.json');
 
 
 //Mostrar Productos 
@@ -40,7 +40,7 @@ router.post('/', (req, res) => {
 })
 
 //Actualizar 1 producto
- router.put('/:id', (req, res) => {
+router.put('/:id', (req, res) => {
     const id = req.params.id
     const data = req.body
     Productos.updateProduct(id, data);
