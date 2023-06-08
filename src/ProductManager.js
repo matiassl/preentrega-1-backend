@@ -63,13 +63,3 @@ class ProductManager {
 }
 
 export default ProductManager;
-// node desafio2.js
-// const Productos = new productManager('./products.json');
-// await Productos.addProduct2('fideos', 'moño', '100', 'img', '522872', '1');
-// await Productos.addProduct2('atun', 'lomito de atun', '799', 'img', '956327', '10');
-// await Productos.addProduct2('jabon', 'jabon liquido', '1700', 'img', '087143', '5');
-// await Productos.addProduct2('harina', '000', '200', 'img', '647182', '3');
-// await Productos.updateProduct(1, { title: 'fideos-matarazzo', price: '99.99' });
-// console.log(await Productos.getProductById(1));
-// await Productos.deleteProduct(3);
-// console.log(await Productos.getProducts());
