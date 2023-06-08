@@ -5,32 +5,19 @@ class CartManager {
         this.path = path;
     }
 
-    createCart = () => {
-        fs.readFile('carritos.json', (error, data) => {
-            if (error) {
-                const carrito = { carritos: [{ id: 1, productos: [] }] };
-                fs.writeFile('carritos.json', JSON.stringify(carrito, null, '\t'), (error) => {
-                    if (error) {
-                        console.error('Error al crear el archivo:', error);
-                    } else {
-                        console.log('Archivo de carritos creado exitosamente.');
-                    }
-                });
-            } else {
-                const carritos = JSON.parse(data);
-                const ultimoID = carritos.carritos[carritos.carritos.length - 1].id;
-                const nuevoID = ultimoID + 1;
-                const nuevoCarrito = { id: nuevoID, productos: [] };
-                carritos.carritos.push(nuevoCarrito);
-                fs.writeFile('carritos.json', JSON.stringify(carritos, null, '\t'), (error) => {
-                    if (error) {
-                        console.error('Error al agregar el carrito:', error);
-                    } else {
-                        console.log('Carrito agregado exitosamente. Nuevo ID:', nuevoID);
-                    }
-                });
-            }
+    addCart = async ({productos}) => {
+        let carritos = [];
+        try {
+          carritos = await this.getCarts();
+        } catch (error) {
+          console.log(`Creando archivo.`);
+        }
+        const id = carritos.length + 1;
+        carritos.push({
+          id,
+          productos
         });
+        await fs.promises.writeFile(this.path, JSON.stringify(carritos, null, '\t'));
     };
 
     // createCart2 = async () => {
@@ -65,8 +52,8 @@ class CartManager {
     //Lee todos los Carritos
     getCarts = async () => {
         try {
-            const products = await fs.promises.readFile(this.path);
-            return JSON.parse(products.toString());
+            const carts = await fs.promises.readFile(this.path);
+            return JSON.parse(carts.toString());
         } catch (error) {
             // console.log(error);
             return [];
@@ -128,7 +115,7 @@ class CartManager {
     }
 }
 
-export default ProductManager;
+export default CartManager;
 // node desafio2.js
 // const Productos = new productManager('./products.json');
 // await Productos.addProduct2('fideos', 'moño', '100', 'img', '522872', '1');
