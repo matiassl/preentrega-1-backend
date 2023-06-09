@@ -68,9 +68,10 @@ class CartManager {
 
     addProductToCart = async (cartId, productId) => {
         const cart = await this.getCartById(cartId);
-
+         cartId = parseInt(cartId)
         if (cart) {
             const product = cart.productos.find(product => product.id == productId);
+           // console.log(cart)
             if (product) {
                 product.quantity += 1;
             } else {
