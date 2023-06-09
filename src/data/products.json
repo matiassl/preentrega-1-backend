@@ -9,5 +9,16 @@
 		"stock": "jojo",
 		"category": "fofgggggggg",
 		"thumbnail": "fof"
+	},
+	{
+		"id": 2,
+		"title": "aaa",
+		"description": "fsad",
+		"code": "gaag",
+		"price": "faaof",
+		"status": "true",
+		"stock": "joaaajo",
+		"category": "fofaaagggggggg",
+		"thumbnail": "foaaaaf"
 	}
 ]

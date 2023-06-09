@@ -72,9 +72,9 @@ class CartManager {
         if (cart) {
             const product = cart.productos.find(product => product.id == productId);
             if (product) {
-                product.cantidad += 1;
+                product.quantity += 1;
             } else {
-                cart.productos.push({ id: productId, cantidad: 1 });
+                cart.productos.push({ id: productId, quantity: 1 });
             }
             const carts = await this.getCarts();
             const updatedCarts = carts.map(carrito => carrito.id === cartId ? cart : carrito);
